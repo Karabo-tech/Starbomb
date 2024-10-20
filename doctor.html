@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Portal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Doctor Portal</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="patient.html">Patient Services</a>
+            <a href="telemedicine-coordinator.html">Telemedicine Coordinator</a>
+        </nav>
+    </header>
+    <main>
+        <h2>Update Schedule</h2>
+        <form id="updateScheduleForm">
+            <label for="availability">Are you available?</label>
+            <select id="availability" name="availability">
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+            <button type="submit">Update</button>
+        </form>
+
+        <h2>Consultation and Prescriptions</h2>
+        <button onclick="consultPatient()">Start Consultation</button>
+        <button onclick="givePrescription()">Give Prescription</button>
+
+        <h2>Follow-up</h2>
+        <button onclick="followUpPatient()">Follow up with Patient</button>
+    </main>
+    <footer>
+        <p>&copy; 2024 Healthcare Access. All Rights Reserved.</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>

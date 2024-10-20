@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telemedicine Coordinator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Telemedicine Coordinator Services</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="patient.html">Patient Services</a>
+            <a href="doctor.html">Doctor Portal</a>
+        </nav>
+    </header>
+    <main>
+        <h2>Data Entry for Patients</h2>
+        <form id="dataEntryForm">
+            <label for="patientName">Patient Name:</label>
+            <input type="text" id="patientName" name="patientName" required>
+            <label for="appointmentDate">Appointment Date:</label>
+            <input type="date" id="appointmentDate" name="appointmentDate" required>
+            <button type="submit">Save Data</button>
+        </form>
+
+        <h2>Deliver Medication</h2>
+        <button onclick="deliverMedication()">Schedule Medication Delivery</button>
+
+        <h2>Set Appointment for Patients</h2>
+        <button onclick="setAppointment()">Schedule Appointment</button>
+    </main>
+    <footer>
+        <p>&copy; 2024 Healthcare Access. All Rights Reserved.</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
