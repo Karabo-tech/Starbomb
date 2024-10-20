@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css">
+    <script type="module" src="https://pyscript.net/latest/pyscript.js"></script>
+    <title>ML Diagnosis</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        .symptom {
+            margin-bottom: 10px;
+        }
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+            color: #4CAF50;
+        }
+    </style>
+</head>
+<body>
+  <py-script src="link.py"></py-script>
+    <h1>Symptom Checker</h1>
+    <form id="symptomForm">
+        <div class="symptom">
+            <label for="fever">Fever:</label>
+            <input type="checkbox" id="fever" name="symptoms" value="1"><br>
+        </div>
+        <div class="symptom">
+            <label for="cough">Cough:</label>
+            <input type="checkbox" id="cough" name="symptoms" value="1"><br>
+        </div>
+        <div class="symptom">
+            <label for="fatigue">Fatigue:</label>
+            <input type="checkbox" id="fatigue" name="symptoms" value="1"><br>
+        </div>
+        <div class="symptom">
+            <label for="nausea">Nausea:</label>
+            <input type="checkbox" id="nausea" name="symptoms" value="1"><br>
+        </div>
+        <div class="symptom">
+            <label for="headache">Headache:</label>
+            <input type="checkbox" id="headache" name="symptoms" value="1"><br>
+        </div>
+        <div class="symptom">
+            <label for="sore_throat">Sore Throat:</label>
+            <input type="checkbox" id="sore_throat" name="symptoms" value="1"><br>
+        </div>
+        <div class="symptom">
+            <label for="shortness_of_breath">Shortness of Breath:</label>
+            <input type="checkbox" id="shortness_of_breath" name="symptoms" value="1"><br>
+        </div>
+        <div class="symptom">
+            <label for="muscle_pain">Muscle Pain:</label>
+            <input type="checkbox" id="muscle_pain" name="symptoms" value="1"><br>
+        </div>
+        <div class="symptom">
+            <label for="chills">Chills:</label>
+            <input type="checkbox" id="chills" name="symptoms" value="1"><br>
+        </div>
+        <div class="symptom">
+            <label for="congestion">Nasal Congestion:</label>
+            <input type="checkbox" id="congestion" name="symptoms" value="1"><br>
+        </div>
+        <div class="symptom">
+            <label for="diarrhea">Diarrhea:</label>
+            <input type="checkbox" id="diarrhea" name="symptoms" value="1"><br>
+        </div>
+        <div class="symptom">
+            <label for="vomiting">Vomiting:</label>
+            <input type="checkbox" id="vomiting" name="symptoms" value="1"><br>
+        </div>
+        <div class="symptom">
+            <label for="skin_rash">Skin Rash:</label>
+            <input type="checkbox" id="skin_rash" name="symptoms" value="1"><br>
+        </div>
+        <div class="symptom">
+            <label for="loss_of_taste">Loss of Taste:</label>
+            <input type="checkbox" id="loss_of_taste" name="symptoms" value="1"><br>
+        </div>
+        <div class="symptom">
+            <label for="loss_of_smell">Loss of Smell:</label>
+            <input type="checkbox" id="loss_of_smell" name="symptoms" value="1"><br>
+        </div>
+        <div class="symptom">
+            <label for="abdominal_pain">Abdominal Pain:</label>
+            <input type="checkbox" id="abdominal_pain" name="symptoms" value="1"><br>
+        </div>
+        <div class="symptom">
+            <label for="chest_pain">Chest Pain:</label>
+            <input type="checkbox" id="chest_pain" name="symptoms" value="1"><br>
+        </div>
+        <div class="symptom">
+            <label for="dizziness">Dizziness:</label>
+            <input type="checkbox" id="dizziness" name="symptoms" value="1"><br>
+        </div>
+        <div class="symptom">
+            <label for="feeling_unwell">Feeling Unwell:</label>
+            <input type="checkbox" id="feeling_unwell" name="symptoms" value="1"><br>
+        </div>
+        <div class="symptom">
+            <label for="sweating">Excessive Sweating:</label>
+            <input type="checkbox" id="sweating" name="symptoms" value="1"><br>
+        </div>
+        <button type="button" id="checkDiagnosis">Check Diagnosis</button>
+    </form>
+
+    <div id="result"></div>
+
+    <script>
+        document.getElementById("checkDiagnosis").onclick = function() {
+            let symptoms = [];
+            let checkboxes = document.querySelectorAll('input[name="symptoms"]');
+            checkboxes.forEach((checkbox) => {
+                symptoms.push(checkbox.checked ? 1 : 0);
+            });
+            document.getElementById("result").innerHTML = 'Checking...';
+
+            fetch('http://127.0.0.1:5000/predict', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ symptoms: symptoms }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("result").innerHTML = 'Predicted Disease: ' + data.prediction;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById("result").innerHTML = 'An error occurred. Please try again.';
+            });
+        };
+    </script>
+</body>
+</html>
